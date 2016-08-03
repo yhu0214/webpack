@@ -3,7 +3,7 @@ var express = require('express')
 var webpack = require('webpack')
 var config = require('../config')
 var proxyMiddleware = require('http-proxy-middleware')
-var webpackConfig = process.env.NODE_ENV === 'testing'
+var webpackConfig = process.env.NODE_ENV === 'production'
   ? require('./webpack.prod.conf')
   : require('./webpack.dev.conf')
 
@@ -55,6 +55,26 @@ app.use(hotMiddleware)
 // serve pure static assets
 var staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)
 app.use(staticPath, express.static('./static'))
+if (process.env.RESOURCES_DIR !== undefined) {
+  app.use('/resources', express.static(process.env.RESOURCES_DIR))
+}
+else {
+  console.warn(`Your RESOURCES_DIR environment var isn't setup. Type "vi ~/.bash_profile" and add a new line for it!`);
+}
+
+// handle missing things
+app.use('*', (req, res) => {
+  const extension = path.extname(req.baseUrl);
+  switch(extension) {
+    case '.mp4':
+    case '.mov':
+      res.sendFile(path.resolve('./static/assets/videos/missing.mp4'));
+      break;
+    default:
+      res.send();
+      break;
+  }  
+});
 
 module.exports = app.listen(port, function (err) {
   if (err) {
@@ -63,3 +83,13 @@ module.exports = app.listen(port, function (err) {
   }
   console.log('Listening at http://localhost:' + port + '\n')
 })
+
+// setup the socket
+var io = require('socket.io')()
+io.on('connection', socket => {
+  socket.on('message', function (message) {
+    // this is the catch all, just proxity it to the other connections
+    socket.broadcast.send(message)
+  })
+})
+io.listen(module.exports)

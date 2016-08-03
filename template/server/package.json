@@ -1,0 +1,11 @@
+{
+  "name": "simple-server",
+  "version": "1.0.0",
+  "description": "Server that serves web and socket.io as a sibling to a Vue.js 'dist' folder",
+  "author": "CX Lab",
+  "private": true,
+  "dependencies": {
+    "socket.io": "^1.4.8",
+    "express": "^4.13.3"
+  }
+}

@@ -1,54 +1,51 @@
 <template>
-  <div id="app">
-    <img class="logo" src="./assets/logo.png">
-    <hello></hello>
-    <p>
-      Welcome to your Vue.js app!
-    </p>
-    <p style="color:red">
-      It seems you are using an outdated version of vue-cli.<br>
-      Upgrade to vue-cli@2.x to get access to newer versions of this template.
-    </p>
-  </div>
+  <component 
+    :is="fullscreenView" 
+    :key="fullscreenView">
+  </component>
 </template>
 
 <script>
-import Hello from './components/Hello'{{#if_eq lintConfig "airbnb"}};{{/if_eq}}
+import store from '../vuex/store';
+
+import {
+  fullscreenView,
+} from '../vuex/getters';
+
+import Home from './components/Home';
 
 export default {
+  vuex: {
+    getters: {
+      fullscreenView,
+    },
+  },
   components: {
-    Hello{{#if_eq lintConfig "airbnb"}},{{/if_eq}}
-  }{{#if_eq lintConfig "airbnb"}},{{/if_eq}}
-}{{#if_eq lintConfig "airbnb"}};{{/if_eq}}
+    Home,
+  },
+  store,
+};
 </script>
 
-<style>
-html {
-  height: 100%;
+<style lang="scss">
+@import '../mixins/scss/main';
+@import '../mixins/scss/fonts';
+
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  box-sizing: border-box;
 }
 
-body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
+::-webkit-scrollbar {
+  display: none;
 }
 
-#app {
-  color: #2c3e50;
-  margin-top: -100px;
-  max-width: 600px;
-  font-family: Source Sans Pro, Helvetica, sans-serif;
-  text-align: center;
-}
-
-#app a {
-  color: #42b983;
-  text-decoration: none;
-}
-
-.logo {
-  width: 100px;
-  height: 100px
+html, body {
+  height: $h;
+  width: $w;
+  overflow: hidden;
+  font-family: 'SamsungOneUI300';
 }
 </style>

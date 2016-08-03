@@ -1,16 +1,13 @@
 <template>
-  <component 
-    :is="fullscreenView" 
-    :key="fullscreenView">
-  </component>
+  <component :is="fullscreenView"></component>
 </template>
 
 <script>
-import store from '../vuex/store';
+import store from './vuex/store';
 
 import {
   fullscreenView,
-} from '../vuex/getters';
+} from './vuex/getters';
 
 import Home from './components/Home';
 
@@ -28,8 +25,8 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../mixins/scss/main';
-@import '../mixins/scss/fonts';
+@import './mixins/scss/main';
+@import './mixins/scss/fonts';
 
 * {
   padding: 0;

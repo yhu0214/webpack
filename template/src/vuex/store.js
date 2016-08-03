@@ -1,12 +1,13 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-
 Vue.use(Vuex);
 
 import {
   SOCKET_CONNECTED,
   SOCKET_DISCONNECTED,
 } from './mutation-types';
+
+import home from './modules/Home/store-module';
 
 // get URL param to see what version of the test we need to show
 function getQueryVar(name) {
@@ -56,4 +57,7 @@ export default new Vuex.Store({
   state,
   mutations,
   middlewares: [init],
+  modules: {
+    home,
+  },
 });

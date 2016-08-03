@@ -1,8 +1,8 @@
 import Vue from 'vue';
-import FamilyHub from './components/FamilyHub';
+import App from './App';
 
 /* eslint-disable no-new */
 new Vue({
   el: 'body',
-  components: { FamilyHub },
+  components: { App },
 });

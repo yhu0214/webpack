@@ -9,7 +9,7 @@
       :class="{ moving: swipe.offsetX !== 0 }"
       :style="{ transform: `translateX(${containerOffset})` }"
       v-el:widget-holder>
-      <div class="widget" v-for="num in pages.total">Widget {{ (num + 1) }}</div>
+      <div class="widget" v-for="num in pages.total">Widget {{ num }}</div>
     </div>
   </div>
   <dot-nav :current="pages.current" :total="pages.total"></dot-nav>

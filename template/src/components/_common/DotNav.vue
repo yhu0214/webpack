@@ -50,5 +50,15 @@ export default {
       height: $s * 12;
     }
   }
+
+  &.dark {
+    .dot {
+      background-color: rgba(#000, 0.5);
+
+      &.active {
+        background-color: #000;
+      }
+    }
+  }
 }
 </style> 

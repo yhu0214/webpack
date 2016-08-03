@@ -12,7 +12,7 @@
       <div class="widget" v-for="num in pages.total">Widget \{{ num + 1 }}</div>
     </div>
   </div>
-  <dot-nav :current="pages.current" :total="pages.total"></dot-nav>
+  <dot-nav :current="pages.current" :total="pages.total" class="dark"></dot-nav>
 </template>
 
 <script>
@@ -124,17 +124,9 @@ $widet-size: $s * 500;
   }
 }
 
-// style the dot nav
+// style the dot nav to match our width
 .dot-nav {
   width: $widet-size;
   margin-top: $s * 10;
-
-  .dot {
-    background-color: rgba(#000, 0.5);
-
-    &.active {
-      background-color: #000;
-    }
-  }
 }
 </style>
